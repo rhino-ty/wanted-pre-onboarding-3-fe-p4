@@ -13,9 +13,10 @@ interface SidebarProps {
 }
 
 // TODO 4-2: Recoil atom `UserAtom`을 이용해 userProfile 값 대체 및 props 삭제
-const Sidebar: React.FC<SidebarProps> = ({ sidebarContent, userProfile }) => {
+const Sidebar: React.FC<SidebarProps> = ({ sidebarContent }) => {
   // TODO 4-2: Recoil atom `UserAtom`을 이용해 userProfile 값 집어넣기
   // hint: useRecoilValue
+  const userProfile = useRecoilValue(UserAtom);
 
   const { currentPath, routeTo } = useRouter();
 
@@ -24,7 +25,10 @@ const Sidebar: React.FC<SidebarProps> = ({ sidebarContent, userProfile }) => {
   };
 
   // TODO 4-2: 로그아웃 호출
-  const logoutHandler = async () => {};
+  const logoutHandler = async () => {
+    await logout();
+    routeTo("/");
+  };
 
   return (
     <div className="sidebar">
